@@ -10,6 +10,8 @@ const router = useRouter();
 const timer = ref(5);
 const isValid = ref(true);
 const isShowMenu = ref(0);
+
+// 验证func name
 function validateName() {
   const validNames = Object.keys(FuncName);
   if (validNames.indexOf(funcName) === -1) {
@@ -29,6 +31,7 @@ onMounted(() => {
   validateName();
 });
 
+// 处理菜单栏点击
 function handleMenu(e) {
   isShowMenu.value = e;
 }
@@ -37,10 +40,55 @@ function handleMenuClick(e) {
   if (e === "home") router.replace("/");
   else router.replace({ path: "/func", query: { name: e } });
 }
+
+// 处理页面刷新
 const route = useRoute();
 watch(route, () => {
   router.go(0);
 });
+
+// 处理图片选择
+const sourceImg = ref("https://sdfsdf.dev/300x300.png");
+const sourceImg1 = ref("https://sdfsdf.dev/300x300.png");
+const outputImg = ref("https://sdfsdf.dev/300x300.png");
+const fileInput = ref(null);
+const fileSrc = ref(-1);
+function getFile(e) {
+  const file = e.target.files[0];
+  const allTypes = "image/png,image/gif,image/jpeg,image/jpg";
+  if (allTypes.indexOf(file.type) === -1 || file.name.split(".").length < 2) {
+    alert("请重新选择图片");
+    return false;
+  }
+  console.log(file);
+  const map = [sourceImg, sourceImg1];
+  const fileReader = new FileReader();
+  fileReader.readAsDataURL(file);
+  fileReader.onload = (e) => {
+    map[fileSrc.value].value = e.target.result;
+  };
+}
+
+function handleClickBtn(id) {
+  switch (id) {
+    case 0:
+      fileInput.value.click();
+      fileSrc.value = 0;
+      break;
+    case 1:
+      fileInput.value.click();
+      fileSrc.value = 1;
+      break;
+    case 2:
+      console.log("downloading");
+      break;
+    case -1:
+      console.log("processing");
+      break;
+    default:
+      break;
+  }
+}
 </script>
 
 <template>
@@ -63,14 +111,18 @@ watch(route, () => {
 
   <div class="container" :class="isShowMenu ? 'container-padding' : ''" v-else>
     <span class="title">请点击上传图片：</span>
+    <input
+      type="file"
+      ref="fileInput"
+      accept="image/*"
+      @change="getFile"
+      style="display: none"
+    />
     <div class="input-container">
       <div class="input-image">
         <div class="mdui-card">
           <div class="mdui-card-media">
-            <img
-              src="https://sdfsdf.dev/300x300.png"
-              style="width: 300px; height: 300px"
-            />
+            <img :src="sourceImg" style="width: 300px; height: 300px" />
             <div class="mdui-card-media-covered">
               <div class="mdui-card-primary">
                 <div class="mdui-card-primary-title">原始图片</div>
@@ -80,6 +132,7 @@ watch(route, () => {
           <div class="mdui-card-actions">
             <button
               class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent"
+              @click.stop="handleClickBtn(0)"
             >
               <i class="mdui-icon material-icons">cloud_upload</i> 上传
             </button>
@@ -87,10 +140,7 @@ watch(route, () => {
         </div>
         <div class="mdui-card" v-if="funcName == 'transDetect'">
           <div class="mdui-card-media">
-            <img
-              src="https://sdfsdf.dev/300x300.png"
-              style="width: 300px; height: 300px"
-            />
+            <img :src="sourceImg1" style="width: 300px; height: 300px" />
             <div class="mdui-card-media-covered">
               <div class="mdui-card-primary">
                 <div class="mdui-card-primary-title">变化图片</div>
@@ -100,26 +150,28 @@ watch(route, () => {
           <div class="mdui-card-actions">
             <button
               class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent"
+              @click.stop="handleClickBtn(1)"
             >
               <i class="mdui-icon material-icons">cloud_upload</i> 上传
             </button>
           </div>
         </div>
       </div>
-      <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-purple">
+      <button
+        class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-purple"
+        @click.stop="handleClickBtn(-1)"
+      >
         开始处理
       </button>
       <div class="input-image">
         <div class="mdui-card">
           <div class="mdui-card-media">
-            <img
-              src="https://sdfsdf.dev/300x300.png"
-              style="width: 300px; height: 300px"
-            />
+            <img :src="outputImg" style="width: 300px; height: 300px" />
           </div>
           <div class="mdui-card-actions">
             <button
               class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent"
+              @click.stop="handleClickBtn(2)"
             >
               <i class="mdui-icon material-icons">cloud_download</i> 下载
             </button>
