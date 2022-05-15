@@ -62,14 +62,14 @@ watch(route, () => {
   </div>
 
   <div class="container" :class="isShowMenu ? 'container-padding' : ''" v-else>
+    <span class="title">请点击上传图片：</span>
     <div class="input-container">
-      <span class="title">请点击上传图片：</span>
       <div class="input-image">
         <div class="mdui-card">
           <div class="mdui-card-media">
             <img
-              src="https://sdfsdf.dev/256x256.png"
-              style="width: 256px; height: 256px"
+              src="https://sdfsdf.dev/300x300.png"
+              style="width: 300px; height: 300px"
             />
             <div class="mdui-card-media-covered">
               <div class="mdui-card-primary">
@@ -88,8 +88,8 @@ watch(route, () => {
         <div class="mdui-card" v-if="funcName == 'transDetect'">
           <div class="mdui-card-media">
             <img
-              src="https://sdfsdf.dev/256x256.png"
-              style="width: 256px; height: 256px"
+              src="https://sdfsdf.dev/300x300.png"
+              style="width: 300px; height: 300px"
             />
             <div class="mdui-card-media-covered">
               <div class="mdui-card-primary">
@@ -106,15 +106,9 @@ watch(route, () => {
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="mdui-col">
-          <button class="mdui-btn mdui-btn-block mdui-color-purple mdui-ripple">
-            <i class="mdui-icon material-icons">arrow_downward</i>
-            开始处理
-            <i class="mdui-icon material-icons">arrow_downward</i>
-          </button>
-        </div>
-      </div>
+      <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-purple">
+        开始处理
+      </button>
       <div class="input-image">
         <div class="mdui-card">
           <div class="mdui-card-media">
@@ -170,7 +164,6 @@ watch(route, () => {
 .container .input-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
@@ -178,16 +171,11 @@ watch(route, () => {
 .container .input-image {
   display: flex;
   justify-content: space-around;
-  width: 80%;
   margin: 2rem auto;
   flex-wrap: wrap;
 }
 
 .mdui-card {
   margin: 0.5rem;
-}
-
-.container .row {
-  width: 80%;
 }
 </style>
