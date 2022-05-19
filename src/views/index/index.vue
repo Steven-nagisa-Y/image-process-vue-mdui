@@ -68,7 +68,7 @@ function handleTap({ target }) {
   width: inherit;
   height: inherit;
   background-size: cover;
-  background-image: url("./static/bg.png");
+  background-image: url("/static/bg.png");
   background-position: left;
   background-repeat: no-repeat;
   filter: blur(2px);
