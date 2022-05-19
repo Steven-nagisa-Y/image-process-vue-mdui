@@ -1,17 +1,18 @@
 <script setup>
 import { onMounted, ref, defineProps, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { FuncName } from "@/config/config";
+import { FuncName, Host } from "@/config/config";
 import Banner from "@/components/Banner/Banner.vue";
 import Menu from "@/components/Menu/Menu.vue";
-const props = defineProps(["query"]);
-const funcName = props.query.name;
+import { Upload } from "@/utils/util";
+// 使用路由能力
 const router = useRouter();
-const timer = ref(5);
-const isValid = ref(true);
-const isShowMenu = ref(0);
 
 // 验证func name
+const props = defineProps(["query"]);
+const funcName = props.query.name;
+const timer = ref(5);
+const isValid = ref(true);
 function validateName() {
   const validNames = Object.keys(FuncName);
   if (validNames.indexOf(funcName) === -1) {
@@ -32,6 +33,7 @@ onMounted(() => {
 });
 
 // 处理菜单栏点击
+const isShowMenu = ref(0);
 function handleMenu(e) {
   isShowMenu.value = e;
 }
@@ -51,22 +53,70 @@ watch(route, () => {
 const sourceImg = ref("https://sdfsdf.dev/300x300.png");
 const sourceImg1 = ref("https://sdfsdf.dev/300x300.png");
 const outputImg = ref("https://sdfsdf.dev/300x300.png");
-const fileInput = ref(null);
-const fileSrc = ref(-1);
+const fileInput = ref(null); // 输入框ref
+let fileObj = null;
+const fileSrc = ref(-1); // 用于两个输入图片时的判定
+const isSelect = ref(0); // 选择了几个图片
+let fileID = ""; // 后端返回的第一个文件id
+let DistFile = "";
 function getFile(e) {
-  const file = e.target.files[0];
+  fileObj = e.target.files[0];
+  if (!e.target.files) return;
   const allTypes = "image/png,image/gif,image/jpeg,image/jpg";
-  if (allTypes.indexOf(file.type) === -1 || file.name.split(".").length < 2) {
+  if (
+    allTypes.indexOf(fileObj.type) === -1 ||
+    fileObj.name.split(".").length < 2
+  ) {
     alert("请重新选择图片");
     return false;
   }
-  console.log(file);
-  const map = [sourceImg, sourceImg1];
+  const sourceMap = [sourceImg, sourceImg1];
+  console.log(fileObj);
   const fileReader = new FileReader();
-  fileReader.readAsDataURL(file);
+  fileReader.readAsDataURL(fileObj);
   fileReader.onload = (e) => {
-    map[fileSrc.value].value = e.target.result;
+    sourceMap[fileSrc.value].value = e.target.result;
+    const nameArr = [funcName, "transDetectNew"];
+    Upload(nameArr[fileSrc.value], fileObj, fileID).then((resp) => {
+      if (resp.status !== 200) alert("上传失败");
+      let data = resp.data;
+      console.log("Response", data);
+      if (data.status !== 0) alert("上传失败");
+      data = data.data;
+      isSelect.value = isSelect.value + 1;
+      if (isSelect.value === 1) {
+        fileID = data.id;
+        DistFile = data.download;
+      } else fileID = undefined;
+      sourceMap[fileSrc.value].value = data.upload.replace(
+        "http://localhost",
+        Host
+      );
+      alert("上传成功！");
+    });
   };
+}
+
+// 处理点击逻辑
+const progress = ref({
+  width: 0,
+  show: false,
+});
+
+function setProgress() {
+  const prog = progress.value;
+  prog.show = true;
+  progress.value = prog;
+  const intr = setInterval(() => {
+    prog.width = prog.width <= 100 ? prog.width + 1 : 100;
+    progress.value = prog;
+  }, 50);
+  setTimeout(() => {
+    outputImg.value = DistFile.replace("http://localhost", Host);
+    clearInterval(intr);
+    progress.value = { show: false, width: 0 };
+    isSelect.value = 0;
+  }, 5000);
 }
 
 function handleClickBtn(id) {
@@ -80,10 +130,18 @@ function handleClickBtn(id) {
       fileSrc.value = 1;
       break;
     case 2:
-      console.log("downloading");
+      if (!/http/gi.test(outputImg.value)) return;
+      window.location.href = outputImg.value;
       break;
     case -1:
-      console.log("processing");
+      if (funcName === "transDetect" && isSelect.value !== 2) {
+        alert("未选择图片");
+        return;
+      } else if (funcName !== "transDetect" && isSelect.value !== 1) {
+        alert("未选择图片");
+        return;
+      }
+      setProgress();
       break;
     default:
       break;
@@ -160,8 +218,9 @@ function handleClickBtn(id) {
       <button
         class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-purple"
         @click.stop="handleClickBtn(-1)"
+        mdui-dialog="{target: '#dialog'}"
       >
-        开始处理
+        <span>开始处理</span>
       </button>
       <div class="input-image">
         <div class="mdui-card">
@@ -178,6 +237,12 @@ function handleClickBtn(id) {
           </div>
         </div>
       </div>
+    </div>
+    <div class="mdui-progress" v-if="progress.show">
+      <div
+        class="mdui-progress-determinate"
+        :style="{ width: progress.width + '%' }"
+      ></div>
     </div>
   </div>
 </template>

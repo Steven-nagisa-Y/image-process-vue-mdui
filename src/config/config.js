@@ -5,3 +5,6 @@ export const FuncName = {
   terrainClassify: "地物分类",
   home: "主页",
 };
+
+export const Url = "http://192.168.0.104:5050/func/";
+export const Host = "http://192.168.0.104";
