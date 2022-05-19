@@ -6,5 +6,8 @@ export const FuncName = {
   home: "主页",
 };
 
-export const Url = "http://192.168.0.104:5050/func/";
-export const Host = "http://192.168.0.104";
+import axios from "axios";
+
+export function Config() {
+  return axios.get("./config.json");
+}

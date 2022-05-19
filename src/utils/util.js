@@ -1,8 +1,9 @@
 import axios from "axios";
-import { Url } from "@/config/config";
+import { Config } from "@/config/config";
 
-export function Upload(func, file, id) {
-  const url = Url + func;
+export async function Upload(func, file, id) {
+  let { data } = await Config();
+  const url = data.Url + func;
   const formData = new FormData();
   formData.append("file", file);
   if (id) formData.append("id", id);

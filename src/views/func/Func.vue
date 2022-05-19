@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref, defineProps, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { FuncName, Host } from "@/config/config";
+import { FuncName, Config } from "@/config/config";
 import Banner from "@/components/Banner/Banner.vue";
 import Menu from "@/components/Menu/Menu.vue";
 import { Upload } from "@/utils/util";
@@ -28,8 +28,10 @@ function validateName() {
   } else return;
 }
 
+const Host = ref("");
 onMounted(() => {
   validateName();
+  Config().then(({ data }) => (Host.value = data.Host));
 });
 
 // 处理菜单栏点击
@@ -90,7 +92,7 @@ function getFile(e) {
       } else fileID = undefined;
       sourceMap[fileSrc.value].value = data.upload.replace(
         "http://localhost",
-        Host
+        Host.value
       );
       alert("上传成功！");
     });
@@ -112,7 +114,7 @@ function setProgress() {
     progress.value = prog;
   }, 50);
   setTimeout(() => {
-    outputImg.value = DistFile.replace("http://localhost", Host);
+    outputImg.value = DistFile.replace("http://localhost", Host.value);
     clearInterval(intr);
     progress.value = { show: false, width: 0 };
     isSelect.value = 0;
