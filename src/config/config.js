@@ -9,5 +9,5 @@ export const FuncName = {
 import axios from "axios";
 
 export function Config() {
-  return axios.get("./config.json");
+  return axios.get("/config.json");
 }
