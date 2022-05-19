@@ -4872,8 +4872,10 @@ body.mdui-locked {
   font-style: normal;
   font-display: swap;
   src: local("Roboto Thin"), local("Roboto-Thin"),
-    url(../fonts/roboto/Roboto-Thin.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-Thin.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Thin.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Thin.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 100;
@@ -4881,8 +4883,10 @@ body.mdui-locked {
   font-style: italic;
   font-display: swap;
   src: local("Roboto ThinItalic"), local("Roboto-ThinItalic"),
-    url(../fonts/roboto/Roboto-ThinItalic.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-ThinItalic.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-ThinItalic.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-ThinItalic.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 300;
@@ -4890,8 +4894,10 @@ body.mdui-locked {
   font-style: normal;
   font-display: swap;
   src: local("Roboto Light"), local("Roboto-Light"),
-    url(../fonts/roboto/Roboto-Light.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-Light.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Light.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Light.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 300;
@@ -4899,8 +4905,10 @@ body.mdui-locked {
   font-style: italic;
   font-display: swap;
   src: local("Roboto LightItalic"), local("Roboto-LightItalic"),
-    url(../fonts/roboto/Roboto-LightItalic.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-LightItalic.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-LightItalic.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-LightItalic.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 400;
@@ -4908,8 +4916,10 @@ body.mdui-locked {
   font-style: normal;
   font-display: swap;
   src: local("Roboto Regular"), local("Roboto-Regular"),
-    url(../fonts/roboto/Roboto-Regular.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-Regular.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Regular.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Regular.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 400;
@@ -4917,8 +4927,10 @@ body.mdui-locked {
   font-style: italic;
   font-display: swap;
   src: local("Roboto RegularItalic"), local("Roboto-RegularItalic"),
-    url(../fonts/roboto/Roboto-RegularItalic.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-RegularItalic.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-RegularItalic.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-RegularItalic.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 500;
@@ -4926,8 +4938,10 @@ body.mdui-locked {
   font-style: normal;
   font-display: swap;
   src: local("Roboto Medium"), local("Roboto-Medium"),
-    url(../fonts/roboto/Roboto-Medium.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-Medium.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Medium.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Medium.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 500;
@@ -4935,8 +4949,10 @@ body.mdui-locked {
   font-style: italic;
   font-display: swap;
   src: local("Roboto MediumItalic"), local("Roboto-MediumItalic"),
-    url(../fonts/roboto/Roboto-MediumItalic.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-MediumItalic.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-MediumItalic.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-MediumItalic.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 700;
@@ -4944,8 +4960,10 @@ body.mdui-locked {
   font-style: normal;
   font-display: swap;
   src: local("Roboto Bold"), local("Roboto-Bold"),
-    url(../fonts/roboto/Roboto-Bold.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-Bold.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Bold.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Bold.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 700;
@@ -4953,8 +4971,10 @@ body.mdui-locked {
   font-style: italic;
   font-display: swap;
   src: local("Roboto BoldItalic"), local("Roboto-BoldItalic"),
-    url(../fonts/roboto/Roboto-BoldItalic.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-BoldItalic.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-BoldItalic.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-BoldItalic.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 900;
@@ -4962,8 +4982,10 @@ body.mdui-locked {
   font-style: normal;
   font-display: swap;
   src: local("Roboto Black"), local("Roboto-Black"),
-    url(../fonts/roboto/Roboto-Black.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-Black.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Black.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-Black.woff)
+      format("woff");
 }
 @font-face {
   font-weight: 900;
@@ -4971,8 +4993,10 @@ body.mdui-locked {
   font-style: italic;
   font-display: swap;
   src: local("Roboto BlackItalic"), local("Roboto-BlackItalic"),
-    url(../fonts/roboto/Roboto-BlackItalic.woff2) format("woff2"),
-    url(../fonts/roboto/Roboto-BlackItalic.woff) format("woff");
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-BlackItalic.woff2)
+      format("woff2"),
+    url(https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/fonts/roboto/Roboto-BlackItalic.woff)
+      format("woff");
 }
 .mdui-typo-display-4,
 .mdui-typo-display-4-opacity {
