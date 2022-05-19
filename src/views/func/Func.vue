@@ -64,10 +64,12 @@ let DistFile = "";
 function getFile(e) {
   fileObj = e.target.files[0];
   if (!e.target.files) return;
-  const allTypes = "image/png,image/gif,image/jpeg,image/jpg";
+  const allTypes = "image/png,image/jpeg,image/jpg";
+  const allExt = ["png", "jpeg", "jpg"];
   if (
     allTypes.indexOf(fileObj.type) === -1 ||
-    fileObj.name.split(".").length < 2
+    fileObj.name.split(".").length < 2 ||
+    allExt.indexOf(fileObj.name.split(".").slice(-1)[0].toLowerCase()) === -1
   ) {
     alert("请重新选择图片");
     return false;
@@ -80,10 +82,17 @@ function getFile(e) {
     sourceMap[fileSrc.value].value = e.target.result;
     const nameArr = [funcName, "transDetectNew"];
     Upload(nameArr[fileSrc.value], fileObj, fileID).then((resp) => {
-      if (resp.status !== 200) alert("上传失败");
+      if (resp.status !== 200) {
+        alert("上传失败");
+        return;
+      }
       let data = resp.data;
       console.log("Response", data);
-      if (data.status !== 0) alert("上传失败");
+      if (data.status !== 0) {
+        alert("上传失败");
+        return;
+      }
+      // 上传成功
       data = data.data;
       isSelect.value = isSelect.value + 1;
       if (isSelect.value === 1) {
@@ -122,17 +131,23 @@ function setProgress() {
 }
 
 function handleClickBtn(id) {
+  const reg = new RegExp(`${Host.value}`, "gi");
   switch (id) {
     case 0:
       fileInput.value.click();
       fileSrc.value = 0;
+      isSelect.value = 0;
       break;
     case 1:
+      if (!reg.test(sourceImg.value)) {
+        alert("请先上传原始图片");
+        return;
+      }
       fileInput.value.click();
       fileSrc.value = 1;
       break;
     case 2:
-      if (!/http/gi.test(outputImg.value)) return;
+      if (!reg.test(outputImg.value)) return;
       window.location.href = outputImg.value;
       break;
     case -1:
