@@ -9,9 +9,8 @@ const router = createRouter({
       component: () => import("@/views/index/index.vue"),
     },
     {
-      path: "/func",
+      path: "/func/:name",
       component: Func,
-      props: (route) => ({ query: route.query }),
     },
     {
       path: "/admin",

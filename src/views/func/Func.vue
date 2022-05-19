@@ -7,10 +7,15 @@ import Menu from "@/components/Menu/Menu.vue";
 import { Upload } from "@/utils/util";
 // 使用路由能力
 const router = useRouter();
+// 处理页面刷新
+const route = useRoute();
+watch(route, () => {
+  router.go(0);
+});
 
 // 验证func name
-const props = defineProps(["query"]);
-const funcName = props.query.name;
+// const props = defineProps(["query"]);
+const funcName = route.params.name;
 const timer = ref(5);
 const isValid = ref(true);
 function validateName() {
@@ -42,14 +47,8 @@ function handleMenu(e) {
 
 function handleMenuClick(e) {
   if (e === "home") router.replace("/");
-  else router.replace({ path: "/func", query: { name: e } });
+  else router.replace({ path: "/func/" + e });
 }
-
-// 处理页面刷新
-const route = useRoute();
-watch(route, () => {
-  router.go(0);
-});
 
 // 处理图片选择
 const sourceImg = ref("https://sdfsdf.dev/300x300.png");

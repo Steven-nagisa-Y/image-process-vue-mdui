@@ -1,11 +1,16 @@
 <script setup>
-import { useRouter } from "vue-router";
+import { watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { FuncName } from "@/config/config";
 const style = {
   "animation-delay": "0.2",
 };
 
 const router = useRouter();
+const route = useRoute();
+watch(route, () => {
+  router.go(0);
+});
 
 function handleTap({ target }) {
   const ID = target.dataset.id;
@@ -17,7 +22,7 @@ function handleTap({ target }) {
   } else if (ID === "home") {
     router.go(0);
   } else {
-    router.push("/func?name=" + ID);
+    router.push("/func/" + ID);
   }
 }
 </script>

@@ -17,7 +17,7 @@ function handleMenu(e) {
 
 function handleMenuClick(e) {
   if (e === "home") router.replace("/");
-  else router.replace({ path: "/func", query: { name: e } });
+  else router.replace({ path: "/func/" + e });
 }
 </script>
 
