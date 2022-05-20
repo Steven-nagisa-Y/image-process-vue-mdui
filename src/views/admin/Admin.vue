@@ -8,7 +8,7 @@ const isShowMenu = ref(0);
 const router = useRouter();
 
 onMounted(() => {
-  localStorage.removeItem("passwd");
+  //
 });
 
 function handleMenu(e) {
@@ -16,6 +16,7 @@ function handleMenu(e) {
 }
 
 function handleMenuClick(e) {
+  localStorage.removeItem("passwd");
   if (e === "home") router.replace("/");
   else router.replace({ path: "/func/" + e });
 }
