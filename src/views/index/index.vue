@@ -1,7 +1,7 @@
 <script setup>
-import { watch } from "vue";
+import { watch, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { FuncName } from "@/config/config";
+import { FuncName, description } from "@/config/config";
 const style = {
   "animation-delay": "0.2",
 };
@@ -12,8 +12,19 @@ watch(route, () => {
   router.go(0);
 });
 
-function handleTap({ target }) {
-  const ID = target.dataset.id;
+const hover = ref("");
+const hoverDesc = ref("Sense Earth 遥感图像智能解译平台");
+function handleHover(id, action) {
+  if (action === 1) {
+    hover.value = id;
+    hoverDesc.value = description[id];
+  } else {
+    hover.value = "";
+    hoverDesc.value = "Sense Earth 遥感图像智能解译平台";
+  }
+}
+
+function handleTap(ID) {
   console.log("tap:", ID);
   if (ID === "admin") {
     localStorage.setItem("passwd", "ryzenx");
@@ -29,26 +40,30 @@ function handleTap({ target }) {
 
 <template>
   <div class="menu-container">
-    <div class="menu" style="margin: 2rem auto">
-      <div
-        class="box title mdui-ripple"
-        data-id="admin"
-        @click.stop="handleTap"
-      >
-        Sense Earth <br />
-        遥感图像智能解译平台
-      </div>
-    </div>
     <div class="menu">
       <div
-        class="box anime mdui-ripple"
+        class="box mdui-ripple"
         v-for="(v, k, i) in FuncName"
         :key="k"
         :style="{ 'animation-delay': style['animation-delay'] * i + 's' }"
         :data-id="k"
-        @click="handleTap"
+        @click="handleTap(k)"
+        @mouseover="handleHover(k, 1)"
+        @mouseleave="handleHover(k, 0)"
       >
+        <img
+          style="width: 4rem; height: 4rem; margin: 1rem"
+          :src="
+            hover === k ? '/static/' + k + '1.svg' : '/static/' + k + '.svg'
+          "
+        />
         {{ v }}
+      </div>
+    </div>
+    <div class="img-hover">
+      <img src="/static/bg1.jpg" />
+      <div class="desc">
+        <span>{{ hoverDesc }}</span>
       </div>
     </div>
   </div>
@@ -86,7 +101,7 @@ function handleTap({ target }) {
 }
 
 .menu {
-  width: 60%;
+  /* width: 10%;
   height: auto;
   border-radius: 16px;
   padding: 1.5rem 0;
@@ -95,7 +110,12 @@ function handleTap({ target }) {
   justify-content: center;
   align-items: center;
   background-color: rgba(100, 100, 100, 0.6);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px); */
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @keyframes animated-border {
@@ -111,20 +131,26 @@ function handleTap({ target }) {
   animation: animated-border 2s infinite;
 }
 
-.box {
-  height: auto;
-  width: 80%;
-  max-width: 40rem;
+.menu .box {
+  min-height: 5rem;
+  width: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 1rem auto;
   font-size: 1.2rem;
   line-height: 3rem;
   font-weight: bold;
   text-align: center;
-  color: var(--theme-blue);
-  border: 2px solid;
+  color: var(--theme-white);
   border-radius: 16px;
-  background-color: rgba(240, 240, 240, 0.2);
-  backdrop-filter: blur(6px);
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  backdrop-filter: blur(10px);
+}
+
+.menu .box:hover {
+  color: var(--theme-blue);
 }
 
 .title {
@@ -132,5 +158,39 @@ function handleTap({ target }) {
   overflow: hidden;
   color: var(--theme-white);
   max-lines: 3;
+}
+
+.img-hover {
+  position: relative;
+  width: 80%;
+  margin: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 2px 5px grey;
+  padding: 0.1rem;
+  z-index: 1000;
+}
+
+.img-hover img {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.img-hover .desc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
 }
 </style>
