@@ -42,7 +42,7 @@ function handleTap(ID) {
   <div class="menu-container">
     <div class="menu">
       <div
-        class="box mdui-ripple"
+        class="box mdui-ripple anime"
         v-for="(v, k, i) in FuncName"
         :key="k"
         :style="{ 'animation-delay': style['animation-delay'] * i + 's' }"
@@ -94,9 +94,9 @@ function handleTap(ID) {
   filter: blur(2px);
 }
 
-@media screen and (width < 375) {
-  .menu-container {
-    overflow-y: scroll;
+@media screen and (width < 600) {
+  .menu {
+    overflow-x: scroll;
   }
 }
 
@@ -112,6 +112,7 @@ function handleTap(ID) {
   background-color: rgba(100, 100, 100, 0.6);
   backdrop-filter: blur(1px); */
   width: 80%;
+  min-width: 30rem;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -162,7 +163,8 @@ function handleTap(ID) {
 
 .img-hover {
   position: relative;
-  width: 80%;
+  width: 70%;
+  max-height: 60%;
   margin: 1rem;
   border-radius: 1rem;
   box-shadow: 0px 2px 5px grey;
@@ -175,6 +177,7 @@ function handleTap(ID) {
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   border-radius: 1rem;
 }
 
@@ -192,5 +195,6 @@ function handleTap(ID) {
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 </style>
