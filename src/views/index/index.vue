@@ -13,7 +13,7 @@ watch(route, () => {
 });
 
 const hover = ref("");
-const hoverDesc = ref("Sense Earth 遥感图像智能解译平台");
+const hoverDesc = ref("Planet Earth 遥感图像智能解译平台");
 function handleHover(id, action) {
   if (action === 1) {
     hover.value = id;
