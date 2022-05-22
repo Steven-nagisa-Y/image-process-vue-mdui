@@ -138,7 +138,7 @@ function handleClickBtn(id) {
       isSelect.value = 0;
       break;
     case 1:
-      if (!reg.test(sourceImg.value)) {
+      if (!reg.test(sourceImg.value) || isSelect.value !== 1) {
         alert("请先上传原始图片");
         return;
       }
@@ -157,6 +157,7 @@ function handleClickBtn(id) {
         alert("未选择图片");
         return;
       }
+      isSelect.value = 0;
       setProgress();
       break;
     default:
